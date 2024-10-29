@@ -9,6 +9,7 @@ export default defineConfig({
    proxy: {
      '/api': {
        target: 'https://yodiday-assignment.onrender.com',
+      // target:'http://localhost:8080',
        changeOrigin: true,
        rewrite: (path) => path.replace(/^\/api/, '/api'),
      },

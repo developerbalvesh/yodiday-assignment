@@ -10,6 +10,7 @@ import Inputs from './pages/Inputs'
 import Profile from './pages/Profile'
 import NotFound from './pages/NotFound'
 
+
 function App() {
 
   return (

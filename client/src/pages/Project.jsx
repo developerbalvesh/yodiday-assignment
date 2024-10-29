@@ -10,7 +10,7 @@ const Project = () => {
 
   const getItems = async () => {
     try {
-      const { data } = await axios.get("/api/v1/items/all");
+      const { data } = await axios.get(`${import.meta.env.VITE_API_BASE_URL}/v1/items/all`);
 
       if (data.success) {
         setItems(data.file);
@@ -26,7 +26,7 @@ const Project = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/v1/items/search", {
+      const { data } = await axios.post(`${import.meta.env.VITE_API_BASE_URL}/v1/items/search`, {
         search
       });
       if (data.success) {
