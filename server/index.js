@@ -1,6 +1,7 @@
 const express = require("express");
 const itemRoute = require('./routes/itemRoute.js')
 const path = require('path');
+const cors = require('cors')
 
 // Get the __filename and __dirname in ES module
 // const __filename = fileURLToPath(import.meta.url);
@@ -10,18 +11,16 @@ const path = require('path');
 // rest object
 const app = express();
 
+app.use(cors())
 app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'public/images')));
-app.use(express.static(path.join(__dirname, './client/dist'))); //middleware for build
-
-
 app.use('/api/v1/items',itemRoute)
 
+app.get('/',(req, res)=>{
+  res.json("Hello")
+})
 // rest api
 // rest api
-app.use('*',function(req, res){
-    res.sendFile(path.join(__dirname, './client/dist/index.html'))
-  })
 
 
 // PORT
