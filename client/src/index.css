@@ -122,7 +122,7 @@ a {
     border-radius: 20px;
     /* padding: 1rem; */
     background-color: #fff;
-    overflow: scroll;
+    overflow: auto;
 
     .menus {
       .menu-list {
