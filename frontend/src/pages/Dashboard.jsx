@@ -4,6 +4,16 @@ import { NavLink } from "react-router-dom";
 import axios from "axios";
 
 const Dashboard = ({ children, setSearch, search, handleSubmit }) => {
+
+  const handleSearch=async(e)=>{
+    e.preventDefault();
+    try {
+      handleSubmit(e);
+      
+    } catch (error) {
+      
+    }
+  }
   return (
     <Layout>
       <div className="show-mobile hidden-space"></div>
@@ -21,7 +31,7 @@ const Dashboard = ({ children, setSearch, search, handleSubmit }) => {
               <i className="fa-solid fa-filter pe-1"></i> Filter
             </p>
             <div className="search">
-              <form onSubmit={(e) => handleSubmit(e)}>
+              <form onSubmit={(e) => handleSearch(e)}>
                 <input
                   type="text"
                   value={search}
