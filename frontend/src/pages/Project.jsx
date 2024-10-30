@@ -12,15 +12,16 @@ const Project = () => {
 
   const getItems = async () => {
     try {
+      setTimeout(() => {
+        setUp(true);
+      }, 5000);
       setLoading(true);
       console.log(import.meta.env.VITE_REACT_APP_BACKEND_BASEURL);
       const { data } = await axios.get(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/all`
       );
-      setTimeout(() => {
-        setUp(true);
-      }, 5000);
-      if (data.success) {
+
+      if (data?.success) {
         setLoading(false);
         setItems(data.file);
       } else {
@@ -78,7 +79,9 @@ const Project = () => {
                     <span>
                       Loading ...
                       <span>
-                        {up?"Backend server is starting.. Please wait...":""}
+                        {up
+                          ? "Backend server is starting.. Please wait..."
+                          : ""}
                       </span>
                       <i className="fa-solid fa-hourglass-end spin-clock"></i>
                     </span>
