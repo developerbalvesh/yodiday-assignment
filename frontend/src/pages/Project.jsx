@@ -7,18 +7,29 @@ import axios from "axios";
 const Project = () => {
   const [items, setItems] = useState([]);
   const [search, setSearch] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [up, setUp] = useState(false);
 
   const getItems = async () => {
     try {
-      console.log(import.meta.env.VITE_REACT_APP_BACKEND_BASEURL)
-      const { data } = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/all`);
-
+      setLoading(true);
+      console.log(import.meta.env.VITE_REACT_APP_BACKEND_BASEURL);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/all`
+      );
+      setTimeout(() => {
+        setUp(true);
+      }, 5000);
       if (data.success) {
+        setLoading(false);
         setItems(data.file);
+      } else {
+        setLoading(false);
       }
     } catch (error) {
       console.log(error.message);
-    } 
+      setLoading(false);
+    }
   };
   useEffect(() => {
     getItems();
@@ -27,9 +38,12 @@ const Project = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/search`, {
-        search
-      });
+      const { data } = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/search`,
+        {
+          search,
+        }
+      );
       if (data.success) {
         setItems(data.file);
       }
@@ -38,7 +52,11 @@ const Project = () => {
 
   return (
     <>
-      <Dashboard handleSubmit={handleSubmit} search={search} setSearch={setSearch}>
+      <Dashboard
+        handleSubmit={handleSubmit}
+        search={search}
+        setSearch={setSearch}
+      >
         <div className="d-vh-100">
           {items[0] ? (
             items?.map((itm, index) => (
@@ -54,11 +72,21 @@ const Project = () => {
             ))
           ) : (
             <>
-            <div className="text-center pt-3">
-              <h3 className="text-secondary">
-                No Results found!
-              </h3>
-            </div>
+              <div className="text-center pt-3">
+                <h3 className="text-secondary">
+                  {loading ? (
+                    <span>
+                      Loading ...
+                      <span>
+                        {up?"Backend server is starting.. Please wait...":""}
+                      </span>
+                      <i className="fa-solid fa-hourglass-end spin-clock"></i>
+                    </span>
+                  ) : (
+                    <span>No Results found</span>
+                  )}
+                </h3>
+              </div>
             </>
           )}
         </div>
