@@ -7,7 +7,7 @@ const Items = ({ title, description, name, location, image }) => {
       <div className="row gap-0 p-0 m-0 mt-2 mb-3">
         <div className="col-3 gap-0 p-0 m-0">
           {image ? (
-            <img src={`/api/v1/items/images/${image}`} alt={title} />
+            <img src={`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/images/${image}`} alt={title} />
           ) : (
             <img src="/image.png" alt={title} />
           )}
