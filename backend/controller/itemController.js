@@ -30,7 +30,7 @@ const searchItemsController = async (req, res) => {
     console.log(search);
 
     // fetch file
-    let fileData = await fs.readFile("./backend/data/db.json", "utf8");
+    let fileData = await fs.readFile(`${__dirname}/../data/db.json`, "utf8");
     let fileArray = JSON.parse(fileData);
 
     if (!Array.isArray(fileArray)) {
