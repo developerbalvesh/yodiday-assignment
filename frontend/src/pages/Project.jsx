@@ -12,9 +12,9 @@ const Project = () => {
 
   const getItems = async () => {
     try {
-      setTimeout(() => {
-        setUp(true);
-      }, 5000);
+      // setTimeout(() => {
+        // setUp(true);
+      // }, 5000);
       setLoading(true);
       console.log(import.meta.env.VITE_REACT_APP_BACKEND_BASEURL);
       const { data } = await axios.get(
