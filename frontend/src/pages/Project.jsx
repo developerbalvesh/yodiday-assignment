@@ -39,6 +39,7 @@ const Project = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setLoading(true);
       const { data } = await axios.post(
         `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/v1/items/search`,
         {
@@ -46,9 +47,13 @@ const Project = () => {
         }
       );
       if (data.success) {
+        setLoading(false);
         setItems(data.file);
       }
-    } catch (error) {}
+      setLoading(false);
+    } catch (error) {
+      setLoading(false)
+    }
   };
 
   return (
